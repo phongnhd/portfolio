@@ -92,7 +92,14 @@ export function Navbar() {
                 document.querySelector("#ai-tool")?.scrollIntoView({ behavior: "smooth" })
               }
             >
-              AI Assistant
+              <a
+                href="/NguyenHoangDuyPhong_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors cursor-pointer"
+              >
+                Resume
+              </a>
             </span>
           </div>
 

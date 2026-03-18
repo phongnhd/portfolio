@@ -34,9 +34,9 @@
     },
     {
       "id": "project-3",
-      "title": "FitSphere",
+      "title": "Upcoming Project - FitSphere",
       "image": "/fitsphere.png",
-      "description": "Community fitness application with real-time workout tracking and peer coaching features.",
+      "description": "This project is currently in development for a community fitness app with real-time tracking and coaching features. Details will be shared with recruiters once complete.",
       "tech": [
         "React Native",
         "Firebase",

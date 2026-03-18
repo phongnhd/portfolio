@@ -1,107 +1,254 @@
-
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Layers } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import React from "react";
+import Image from "next/image";
+import projectsData from "@/data/projects.json";
+import FloatingIcon from "@/components/FloatingIcon";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Github } from "lucide-react";
+
+interface Project {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  tech: string[];
+  liveUrl: string;
+  githubUrl: string;
+}
+
+interface ProjectsData {
+  title: string;
+  description: string;
+  githubUrl: string;
+  projects: Project[];
+}
+
+const data = projectsData as ProjectsData;
 
 export function Projects() {
-  const projects = [
-    {
-      id: 'project-1',
-      title: 'VentureDash',
-      description: 'A comprehensive management dashboard for venture capital firms to track portfolio performance and investment pipelines.',
-      tech: ['React', 'Next.js', 'PostgreSQL', 'Tailwind'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      id: 'project-2',
-      title: 'SocialPulse',
-      description: 'AI-driven social media sentiment analysis tool providing real-time brand perception metrics and automated reporting.',
-      tech: ['Python', 'FastAPI', 'Redis', 'OpenAI'],
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      id: 'project-3',
-      title: 'FitSphere',
-      description: 'Community-focused fitness application with real-time workout synchronization and peer-to-peer coaching features.',
-      tech: ['React Native', 'Firebase', 'Expo', 'Node.js'],
-      liveUrl: '#',
-      githubUrl: '#'
-    }
-  ];
-
   return (
-    <section id="projects" className="py-24 bg-secondary/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+    <section id="projects" style={{ backgroundColor: "#f2d190", borderTop: "1.5px solid #000", borderBottom: "1.5px solid #000" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Serif+Display:ital@0;1&display=swap');
+
+        .pj-display { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; line-height: 0.9; }
+        .pj-body    { font-family: 'DM Sans', sans-serif; }
+
+        .pj-card {
+          background: #fff;
+          border: 2.5px solid #000;
+          box-shadow: 6px 6px 0 #000;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s cubic-bezier(0.22,1,0.36,1);
+          will-change: transform;
+        }
+        .pj-card:hover {
+          transform: translate(-4px, -4px);
+          box-shadow: 10px 10px 0 #000;
+        }
+
+        .pj-img-wrap {
+          position: relative;
+          height: 220px;
+          overflow: hidden;
+          border-bottom: 2.5px solid #000;
+        }
+        .pj-img-wrap img {
+          transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+        .pj-card:hover .pj-img-wrap img {
+          transform: scale(1.06);
+        }
+
+        .pj-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.55);
+          opacity: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: opacity 0.2s ease;
+        }
+        .pj-card:hover .pj-overlay {
+          opacity: 1;
+        }
+
+        .pj-live-btn {
+          background: #FBBF24;
+          color: #000;
+          border: 2px solid #000;
+          box-shadow: 3px 3px 0 #000;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 700;
+          font-size: 0.8rem;
+          padding: 6px 16px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-decoration: none;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .pj-live-btn:hover {
+          transform: translate(2px, 2px);
+          box-shadow: 1px 1px 0 #000;
+        }
+
+        .pj-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #16a34a;
+          background: transparent;
+          padding: 0;
+        }
+
+        .pj-footer {
+          border-top: 2px solid #000;
+          padding: 12px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: auto;
+        }
+
+        .pj-footer-link {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #000;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-decoration: none;
+          transition: opacity 0.15s;
+        }
+        .pj-footer-link:hover { opacity: 0.6; }
+
+        .pj-github-btn {
+          background: #FEFCE8;
+          color: #000;
+          border: 2px solid #000;
+          box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 700;
+          font-size: 0.85rem;
+          padding: 10px 20px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          text-decoration: none;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .pj-github-btn:hover {
+          transform: translate(2px, 2px);
+          box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .pj-counter {
+          background: #FEFCE8;
+          color: #000;
+          font-family: 'Courier New', monospace;
+          font-size: 0.8rem;
+          padding: 10px 16px;
+          border: 2px solid #000;
+          line-height: 1.4;
+        }
+
+        ::selection { background: #FF6EB4; color: #000; }
+        .pj-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        @media (min-width: 768px)  { ::selection { background: #FF6EB4; color: #000; }
+        .pj-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { ::selection { background: #FF6EB4; color: #000; }
+        .pj-grid { grid-template-columns: repeat(3, 1fr); } }
+      `}</style>
+
+      {/* HEADER */}
+      <div style={{ padding: "60px 32px 40px", maxWidth: "1280px", margin: "0 auto" }}>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
           <div>
-            <h2 className="text-3xl font-bold font-headline sm:text-4xl">Featured Projects</h2>
-            <div className="mt-2 h-1.5 w-20 bg-primary rounded-full"></div>
-            <p className="mt-4 text-muted-foreground max-w-xl text-lg">
-              A selection of my recent works ranging from full-stack applications to niche technical tools.
+            <h2 className="pj-display" style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)", color: "#000" }}>
+              {data.title}
+            </h2>
+            <p className="pj-body" style={{ fontSize: "1.1rem", fontFamily: "'DM Serif Display', serif", fontStyle: "italic", color: "#333", marginTop: "12px", lineHeight: 1.5 }}>
+              {data.description}
             </p>
           </div>
-          <Button variant="outline" asChild>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              View All on GitHub <Github className="ml-2 h-4 w-4" />
+
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "12px" }}>
+            <div className="pj-counter">
+              Total Projects:<br />
+              <strong style={{ fontSize: "1.4rem" }}>{data.projects.length}</strong>
+            </div>
+            <a href={data.githubUrl} target="_blank" rel="noopener noreferrer" className="pj-github-btn">
+              View All on GitHub
+              <FloatingIcon />
             </a>
-          </Button>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, idx) => {
-            const img = PlaceHolderImages.find(i => i.id === project.id);
-            return (
-              <Card key={idx} className="overflow-hidden flex flex-col group h-full">
-                <div className="relative h-56 w-full overflow-hidden">
-                  <Image 
-                    src={img?.imageUrl || ''} 
-                    alt={project.title} 
-                    fill 
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    data-ai-hint={img?.imageHint}
-                  />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                    <Button variant="secondary" size="sm" asChild className="rounded-full shadow-lg">
-                      <a href={project.liveUrl}><ExternalLink className="h-4 w-4 mr-2" /> Live Demo</a>
-                    </Button>
-                  </div>
+        {/* GRID */}
+        <div className="pj-grid">
+          {data.projects.map((project) => (
+            <div key={project.id} className="pj-card">
+              <div className="pj-img-wrap">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-contain"
+                />
+                <div className="pj-overlay">
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-live-btn">
+                    <ExternalLink style={{ width: 14, height: 14 }} />
+                    Live Demo
+                  </a>
                 </div>
-                <CardHeader className="flex-1">
-                  <div className="flex gap-2 mb-3">
-                    {project.tech.map((t, i) => (
-                      <span key={i} className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/5 px-2 py-0.5 rounded">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <CardTitle className="text-xl font-headline group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                </CardHeader>
-                <CardFooter className="pt-0 border-t mt-auto py-4">
-                  <div className="flex items-center gap-4 w-full justify-between">
-                    <a href={project.githubUrl} className="text-sm font-medium flex items-center hover:text-primary transition-colors">
-                      <Github className="h-4 w-4 mr-2" /> Source Code
-                    </a>
-                    <a href={project.liveUrl} className="text-sm font-medium flex items-center text-accent hover:underline">
-                      View Project <ExternalLink className="h-4 w-4 ml-2" />
-                    </a>
-                  </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
+              </div>
+
+              {/* CONTENT */}
+              <div style={{ padding: "20px 20px 0", flex: 1 }}>
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px" }}>
+                  {project.tech.map((t) => (
+                    <span key={t} className="pj-tag">{t}</span>
+                  ))}
+                </div>
+
+                <h3 className="pj-display" style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "#000", marginBottom: "10px" }}>
+                  {project.title}
+                </h3>
+
+                <p className="pj-body" style={{ fontSize: "0.88rem", color: "#444", lineHeight: 1.65, marginBottom: "16px", fontStyle: "italic" }}>
+                  {project.description}
+                </p>
+              </div>
+
+              {/* FOOTER */}
+              <div className="pj-footer">
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
+                  <Github style={{ width: 15, height: 15 }} />
+                  Source Code
+                </a>
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
+                  View Project
+                  <ExternalLink style={{ width: 15, height: 15 }} />
+                </a>
+              </div>
+
+            </div>
+          ))}
         </div>
+
+        <div style={{ height: "60px" }} />
       </div>
     </section>
   );

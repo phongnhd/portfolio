@@ -1,0 +1,50 @@
+{
+  "title": "Featured Projects",
+  "description": "Selected projects showcasing full-stack development and modern web technologies.",
+  "githubUrl": "https://github.com/phongnhd",
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "VietFresh - Agricultural E-commerce Platform",
+      "image": "/vietfresh.png",
+      "description": "Graduation internship project at GNN SOFTWARE CO., LTD. Developed an agricultural e-commerce platform with blockchain-based product traceability.",
+      "tech": [
+        "React.js",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB",
+        "Solidity"
+      ],
+      "liveUrl": "https://vietfresh-offical.vercel.app",
+      "githubUrl": "#"
+    },
+    {
+      "id": "portfolio",
+      "title": "Personal Portfolio",
+      "image": "/portfolio.png",
+      "description": "This portfolio website built with Next.js, Tailwind CSS and modern animations showcasing my work and skills.",
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion"
+      ],
+      "liveUrl": "https://phongnhd.dev",
+      "githubUrl": "https://github.com/phongnhd"
+    },
+    {
+      "id": "project-3",
+      "title": "FitSphere",
+      "image": "/fitsphere.png",
+      "description": "Community fitness application with real-time workout tracking and peer coaching features.",
+      "tech": [
+        "React Native",
+        "Firebase",
+        "Expo",
+        "Node.js"
+      ],
+      "liveUrl": "#",
+      "githubUrl": "#"
+    }
+  ]
+}

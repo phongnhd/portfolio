@@ -1,0 +1,20 @@
+{
+  "title": "About Me",
+  "journeyTitle": "My Journey",
+  "journey": [
+    "I'm a passionate Fullstack Developer fresher who enjoys building complete web applications from frontend to backend. I work with technologies like React, Next.js, Node.js, and databases to create responsive and user-friendly applications.",
+    "I started learning web development and built projects with frontend, backend, and simple user interfaces."
+  ],
+  "stats": [
+    { "label": "Projects Built", "value": "5+" },
+    { "label": "Tech Stack", "value": "Fullstack" },
+    { "label": "Learning Mindset", "value": "∞" }
+  ],
+  "careerTitle": "Career Aspirations",
+  "career": [
+    "Growing into a professional Fullstack Developer through real-world experience.",
+    "Improving my skills in both frontend and backend technologies.",
+    "Building scalable and maintainable web applications.",
+    "Continuously learning and adapting to new technologies."
+  ]
+}

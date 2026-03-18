@@ -1,0 +1,37 @@
+{
+  "title": "Skills & Technologies",
+  "categories": [
+    {
+      "title": "Frontend",
+      "icon": "Monitor",
+      "description": "Xây dựng giao diện người dùng hiện đại, responsive và tối ưu trải nghiệm với các framework phổ biến",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "React.js",
+        "Next.js",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "title": "Backend",
+      "icon": "Database",
+      "description": "Phát triển API, xử lý logic nghiệp vụ và tối ưu hiệu suất server với Node.js và .NET",
+      "skills": ["Node.js", "Express.js", "C#", ".NET"]
+    },
+    {
+      "title": "Database",
+      "icon": "Layers",
+      "description": "Thiết kế và quản lý cơ sở dữ liệu SQL và NoSQL, tối ưu truy vấn và hiệu suất",
+      "skills": ["MongoDB", "PostgreSQL", "MSSQL"]
+    },
+    {
+      "title": "Tools & Technologies",
+      "icon": "Globe",
+      "description": "Sử dụng thành thạo các công cụ phát triển và công nghệ hiện đại",
+      "skills": ["Git", "Vercel", "Docker", "CI/CD"]
+    }
+  ]
+}

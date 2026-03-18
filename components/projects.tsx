@@ -25,7 +25,6 @@ interface ProjectsData {
 
 const data = projectsData as ProjectsData;
 
-// ─── Coming Soon Card ──────────────────────────────────────────────────────────
 function ComingSoonCard({ project }: { project: Project }) {
   const [notified, setNotified] = useState(false);
 
@@ -81,7 +80,6 @@ function ComingSoonCard({ project }: { project: Project }) {
   );
 }
 
-// ─── Main Component ────────────────────────────────────────────────────────────
 export function Projects() {
   return (
     <section id="projects" style={{ backgroundColor: "#f2d190", borderTop: "1.5px solid #000", borderBottom: "1.5px solid #000" }}>
@@ -217,7 +215,7 @@ export function Projects() {
           line-height: 1.4;
         }
 
-        /* ── Coming Soon card ── */
+        /* Coming Soon */
         .pj-cs-card {
           background: #0a0a0a !important;
           border-color: #FEFCE8 !important;
@@ -228,7 +226,6 @@ export function Projects() {
         .pj-cs-card:hover {
           box-shadow: 10px 10px 0 #FEFCE8 !important;
         }
-        /* override hover background leak */
         .pj-cs-card:hover .pj-cs-grid { opacity: 0.9; }
 
         .pj-cs-grid {
@@ -267,8 +264,6 @@ export function Projects() {
           92%  { opacity: 1; }
           100% { top: 100%; opacity: 0; }
         }
-
-        /* corner brackets */
         .pj-cs-corner {
           position: absolute;
           width: 18px;
@@ -384,7 +379,6 @@ export function Projects() {
           cursor: default;
         }
 
-        /* ── Grid ── */
         ::selection { background: #FF6EB4; color: #000; }
         .pj-grid {
           display: grid;
@@ -427,7 +421,6 @@ export function Projects() {
               return <ComingSoonCard key={project.id} project={project} />;
             }
 
-            // Regular card
             return (
               <div key={project.id} className="pj-card">
                 <div className="pj-img-wrap">

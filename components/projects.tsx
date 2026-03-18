@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import projectsData from "@/data/projects.json";
 import FloatingIcon from "@/components/FloatingIcon";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Clock, Bell, BellOff } from "lucide-react";
 
 interface Project {
   id: string;
@@ -26,6 +25,63 @@ interface ProjectsData {
 
 const data = projectsData as ProjectsData;
 
+// ─── Coming Soon Card ──────────────────────────────────────────────────────────
+function ComingSoonCard({ project }: { project: Project }) {
+  const [notified, setNotified] = useState(false);
+
+  return (
+    <div className="pj-card pj-cs-card">
+      {/* Animated grid bg */}
+      <div className="pj-cs-grid" />
+      {/* Scanning line */}
+      <div className="pj-cs-scan" />
+      {/* Corner accents */}
+      <span className="pj-cs-corner pj-cs-tl" />
+      <span className="pj-cs-corner pj-cs-tr" />
+      <span className="pj-cs-corner pj-cs-bl" />
+      <span className="pj-cs-corner pj-cs-br" />
+
+      <div className="pj-cs-body">
+        {/* Clock icon */}
+        <div className="pj-cs-clock">
+          <Clock style={{ width: 28, height: 28, color: "#FBBF24" }} />
+        </div>
+
+        {/* Badge */}
+        <span className="pj-cs-badge">Coming Soon</span>
+
+        {/* Title — strip "Upcoming Project - " prefix if present */}
+        <h3 className="pj-display pj-cs-title">
+          {project.title.replace(/^Upcoming Project\s*[-–]\s*/i, "")}
+        </h3>
+
+        {/* Description */}
+        <p className="pj-body pj-cs-desc">{project.description}</p>
+
+        {/* Tech tags */}
+        <div className="pj-cs-tags">
+          {project.tech.map((t) => (
+            <span key={t} className="pj-cs-tag">{t}</span>
+          ))}
+        </div>
+
+        {/* Notify Me button */}
+        <button
+          className={`pj-cs-notify ${notified ? "done" : "idle"}`}
+          onClick={() => !notified && setNotified(true)}
+        >
+          {notified ? (
+            <><BellOff style={{ width: 14, height: 14 }} /> Notified!</>
+          ) : (
+            <><Bell style={{ width: 14, height: 14 }} /> Notify Me</>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ────────────────────────────────────────────────────────────
 export function Projects() {
   return (
     <section id="projects" style={{ backgroundColor: "#f2d190", borderTop: "1.5px solid #000", borderBottom: "1.5px solid #000" }}>
@@ -35,6 +91,7 @@ export function Projects() {
         .pj-display { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; line-height: 0.9; }
         .pj-body    { font-family: 'DM Sans', sans-serif; }
 
+        /* ── Regular card ── */
         .pj-card {
           background: #fff;
           border: 2.5px solid #000;
@@ -160,16 +217,182 @@ export function Projects() {
           line-height: 1.4;
         }
 
+        /* ── Coming Soon card ── */
+        .pj-cs-card {
+          background: #0a0a0a !important;
+          border-color: #FEFCE8 !important;
+          box-shadow: 6px 6px 0 #FEFCE8 !important;
+          position: relative;
+          min-height: 420px;
+        }
+        .pj-cs-card:hover {
+          box-shadow: 10px 10px 0 #FEFCE8 !important;
+        }
+        /* override hover background leak */
+        .pj-cs-card:hover .pj-cs-grid { opacity: 0.9; }
+
+        .pj-cs-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(251,191,36,0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(251,191,36,0.07) 1px, transparent 1px);
+          background-size: 26px 26px;
+          animation: cs-drift 20s linear infinite;
+          pointer-events: none;
+        }
+        @keyframes cs-drift {
+          0%   { background-position: 0 0; }
+          100% { background-position: 26px 26px; }
+        }
+
+        .pj-cs-scan {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+          z-index: 1;
+        }
+        .pj-cs-scan::after {
+          content: '';
+          position: absolute;
+          left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(251,191,36,0.55), transparent);
+          animation: cs-scan 3.2s ease-in-out infinite;
+        }
+        @keyframes cs-scan {
+          0%   { top: -2px; opacity: 0; }
+          8%   { opacity: 1; }
+          92%  { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+        }
+
+        /* corner brackets */
+        .pj-cs-corner {
+          position: absolute;
+          width: 18px;
+          height: 18px;
+          border-color: #FBBF24;
+          border-style: solid;
+          z-index: 2;
+        }
+        .pj-cs-tl { top: 10px; left: 10px;  border-width: 2px 0 0 2px; }
+        .pj-cs-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+        .pj-cs-bl { bottom: 10px; left: 10px;  border-width: 0 0 2px 2px; }
+        .pj-cs-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+        .pj-cs-body {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          flex: 1;
+          padding: 44px 28px 36px;
+          gap: 0;
+        }
+
+        .pj-cs-clock {
+          width: 60px;
+          height: 60px;
+          border: 2.5px solid #FBBF24;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 18px;
+          animation: cs-pulse 2.6s ease-in-out infinite;
+        }
+        @keyframes cs-pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.45); }
+          50%       { box-shadow: 0 0 0 10px rgba(251,191,36,0); }
+        }
+
+        .pj-cs-badge {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #000;
+          background: #FBBF24;
+          border: 1.5px solid #000;
+          padding: 3px 10px;
+          margin-bottom: 14px;
+        }
+
+        .pj-cs-title {
+          font-size: clamp(1.5rem, 3.5vw, 2.2rem) !important;
+          color: #fff !important;
+          margin-bottom: 12px;
+        }
+
+        .pj-cs-desc {
+          font-size: 0.8rem;
+          color: rgba(255,255,255,0.45);
+          line-height: 1.7;
+          max-width: 280px;
+          margin-bottom: 20px;
+          font-style: italic;
+        }
+
+        .pj-cs-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          justify-content: center;
+          margin-bottom: 26px;
+        }
+        .pj-cs-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.07em;
+          color: rgba(255,255,255,0.4);
+          border: 1.5px solid rgba(255,255,255,0.15);
+          padding: 3px 9px;
+        }
+
+        .pj-cs-notify {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          padding: 10px 22px;
+          border: 2px solid #FBBF24;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          cursor: pointer;
+          transition: background 0.15s ease, color 0.15s ease;
+        }
+        .pj-cs-notify.idle {
+          background: transparent;
+          color: #FBBF24;
+        }
+        .pj-cs-notify.idle:hover {
+          background: #FBBF24;
+          color: #000;
+        }
+        .pj-cs-notify.done {
+          background: #4ADE80;
+          border-color: #4ADE80;
+          color: #000;
+          cursor: default;
+        }
+
+        /* ── Grid ── */
         ::selection { background: #FF6EB4; color: #000; }
         .pj-grid {
           display: grid;
           grid-template-columns: 1fr;
           gap: 28px;
         }
-        @media (min-width: 768px)  { ::selection { background: #FF6EB4; color: #000; }
-        .pj-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { ::selection { background: #FF6EB4; color: #000; }
-        .pj-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 768px)  { .pj-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .pj-grid { grid-template-columns: repeat(3, 1fr); } }
       `}</style>
 
       {/* HEADER */}
@@ -198,54 +421,57 @@ export function Projects() {
 
         {/* GRID */}
         <div className="pj-grid">
-          {data.projects.map((project) => (
-            <div key={project.id} className="pj-card">
-              <div className="pj-img-wrap">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain"
-                />
-                <div className="pj-overlay">
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-live-btn">
-                    <ExternalLink style={{ width: 14, height: 14 }} />
-                    Live Demo
+          {data.projects.map((project) => {
+            // Render Coming Soon card for project-3
+            if (project.id === "project-3") {
+              return <ComingSoonCard key={project.id} project={project} />;
+            }
+
+            // Regular card
+            return (
+              <div key={project.id} className="pj-card">
+                <div className="pj-img-wrap">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-contain"
+                  />
+                  <div className="pj-overlay">
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-live-btn">
+                      <ExternalLink style={{ width: 14, height: 14 }} />
+                      Live Demo
+                    </a>
+                  </div>
+                </div>
+
+                <div style={{ padding: "20px 20px 0", flex: 1 }}>
+                  <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px" }}>
+                    {project.tech.map((t) => (
+                      <span key={t} className="pj-tag">{t}</span>
+                    ))}
+                  </div>
+                  <h3 className="pj-display" style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "#000", marginBottom: "10px" }}>
+                    {project.title}
+                  </h3>
+                  <p className="pj-body" style={{ fontSize: "0.88rem", color: "#444", lineHeight: 1.65, marginBottom: "16px", fontStyle: "italic" }}>
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="pj-footer">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
+                    <Github style={{ width: 15, height: 15 }} />
+                    Source Code
+                  </a>
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
+                    View Project
+                    <ExternalLink style={{ width: 15, height: 15 }} />
                   </a>
                 </div>
               </div>
-
-              {/* CONTENT */}
-              <div style={{ padding: "20px 20px 0", flex: 1 }}>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px" }}>
-                  {project.tech.map((t) => (
-                    <span key={t} className="pj-tag">{t}</span>
-                  ))}
-                </div>
-
-                <h3 className="pj-display" style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "#000", marginBottom: "10px" }}>
-                  {project.title}
-                </h3>
-
-                <p className="pj-body" style={{ fontSize: "0.88rem", color: "#444", lineHeight: 1.65, marginBottom: "16px", fontStyle: "italic" }}>
-                  {project.description}
-                </p>
-              </div>
-
-              {/* FOOTER */}
-              <div className="pj-footer">
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
-                  <Github style={{ width: 15, height: 15 }} />
-                  Source Code
-                </a>
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="pj-footer-link">
-                  View Project
-                  <ExternalLink style={{ width: 15, height: 15 }} />
-                </a>
-              </div>
-
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div style={{ height: "60px" }} />

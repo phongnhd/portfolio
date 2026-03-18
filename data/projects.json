@@ -27,21 +27,22 @@
         "Next.js",
         "TypeScript",
         "Tailwind CSS",
-        "Framer Motion"
+        " With Heart"
       ],
       "liveUrl": "https://phongnhd.dev",
       "githubUrl": "https://github.com/phongnhd"
     },
     {
       "id": "project-3",
-      "title": "Upcoming Project - FitSphere",
-      "image": "/fitsphere.png",
-      "description": "This project is currently in development for a community fitness app with real-time tracking and coaching features. Details will be shared with recruiters once complete.",
+      "title": "Upcoming Project - Join me",
+      "image": "/fit.png",
+      "description": "This upcoming project promises to be fantastic, and I’m looking forward to building it together with you.",
       "tech": [
-        "React Native",
-        "Firebase",
-        "Expo",
-        "Node.js"
+        "Web3",
+        "Smart Contracts",
+        "Blockchain",
+        "Node.js",
+        "Passion"
       ],
       "liveUrl": "#",
       "githubUrl": "#"

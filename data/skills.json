@@ -27,11 +27,11 @@
       "description": "Thiết kế và quản lý cơ sở dữ liệu SQL và NoSQL, tối ưu truy vấn và hiệu suất",
       "skills": ["MongoDB", "PostgreSQL", "MSSQL"]
     },
-    {
-      "title": "Tools & Technologies",
+   {
+       "title": "Tools & Technologies",
       "icon": "Globe",
-      "description": "Sử dụng thành thạo các công cụ phát triển và công nghệ hiện đại",
-      "skills": ["Git", "Vercel", "Docker", "CI/CD"]
-    }
+      "description": "Sử dụng thành thạo các công cụ phát triển cơ bản và công nghệ hiện đại, bao gồm blockchain",
+      "skills": ["Git", "Vercel", "CI/CD", "Blockchain", "VS Code", "Postman"]
+  }
   ]
 }

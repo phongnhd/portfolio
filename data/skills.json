@@ -4,7 +4,7 @@
     {
       "title": "Frontend",
       "icon": "Monitor",
-      "description": "Xây dựng giao diện người dùng hiện đại, responsive và tối ưu trải nghiệm với các framework phổ biến",
+      "description": "Build modern, responsive user interfaces optimized for user experience using popular frameworks",
       "skills": [
         "HTML",
         "CSS",
@@ -18,19 +18,19 @@
     {
       "title": "Backend",
       "icon": "Database",
-      "description": "Phát triển API, xử lý logic nghiệp vụ và tối ưu hiệu suất server với Node.js và .NET",
+      "description": "Build APIs, handle business logic, and optimize server performance with Node.js and .NET.",
       "skills": ["Node.js", "Express.js", "C#", ".NET"]
     },
     {
       "title": "Database",
       "icon": "Layers",
-      "description": "Thiết kế và quản lý cơ sở dữ liệu SQL và NoSQL, tối ưu truy vấn và hiệu suất",
+      "description": "Design and maintain SQL/NoSQL databases, optimizing queries and overall performance.",
       "skills": ["MongoDB", "PostgreSQL", "MSSQL"]
     },
    {
        "title": "Tools & Technologies",
       "icon": "Globe",
-      "description": "Sử dụng thành thạo các công cụ phát triển cơ bản và công nghệ hiện đại, bao gồm blockchain",
+      "description": "Skilled in core development tools and modern technologies, with experience in blockchain.",
       "skills": ["Git", "Vercel", "CI/CD", "Blockchain", "VS Code", "Postman"]
   }
   ]

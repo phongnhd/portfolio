@@ -30,41 +30,31 @@ function ComingSoonCard({ project }: { project: Project }) {
 
   return (
     <div className="pj-card pj-cs-card">
-      {/* Animated grid bg */}
       <div className="pj-cs-grid" />
-      {/* Scanning line */}
       <div className="pj-cs-scan" />
-      {/* Corner accents */}
       <span className="pj-cs-corner pj-cs-tl" />
       <span className="pj-cs-corner pj-cs-tr" />
       <span className="pj-cs-corner pj-cs-bl" />
       <span className="pj-cs-corner pj-cs-br" />
 
       <div className="pj-cs-body">
-        {/* Clock icon */}
         <div className="pj-cs-clock">
           <Clock style={{ width: 28, height: 28, color: "#FBBF24" }} />
         </div>
 
-        {/* Badge */}
         <span className="pj-cs-badge">Coming Soon</span>
 
-        {/* Title — strip "Upcoming Project - " prefix if present */}
         <h3 className="pj-display pj-cs-title">
           {project.title.replace(/^Upcoming Project\s*[-–]\s*/i, "")}
         </h3>
-
-        {/* Description */}
+  
         <p className="pj-body pj-cs-desc">{project.description}</p>
-
-        {/* Tech tags */}
         <div className="pj-cs-tags">
           {project.tech.map((t) => (
             <span key={t} className="pj-cs-tag">{t}</span>
           ))}
         </div>
 
-        {/* Notify Me button */}
         <button
           className={`pj-cs-notify ${notified ? "done" : "idle"}`}
           onClick={() => !notified && setNotified(true)}
@@ -89,7 +79,6 @@ export function Projects() {
         .pj-display { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; line-height: 0.9; }
         .pj-body    { font-family: 'DM Sans', sans-serif; }
 
-        /* ── Regular card ── */
         .pj-card {
           background: #fff;
           border: 2.5px solid #000;
@@ -215,7 +204,6 @@ export function Projects() {
           line-height: 1.4;
         }
 
-        /* Coming Soon */
         .pj-cs-card {
           background: #0a0a0a !important;
           border-color: #FEFCE8 !important;
@@ -389,7 +377,6 @@ export function Projects() {
         @media (min-width: 1024px) { .pj-grid { grid-template-columns: repeat(3, 1fr); } }
       `}</style>
 
-      {/* HEADER */}
       <div style={{ padding: "60px 32px 40px", maxWidth: "1280px", margin: "0 auto" }}>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "24px", marginBottom: "48px" }}>
           <div>
@@ -413,10 +400,8 @@ export function Projects() {
           </div>
         </div>
 
-        {/* GRID */}
         <div className="pj-grid">
           {data.projects.map((project) => {
-            // Render Coming Soon card for project-3
             if (project.id === "project-3") {
               return <ComingSoonCard key={project.id} project={project} />;
             }

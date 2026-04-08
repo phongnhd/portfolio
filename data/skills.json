@@ -31,7 +31,7 @@
        "title": "Tools & Technologies",
       "icon": "Globe",
       "description": "Skilled in core development tools and modern technologies, with experience in blockchain.",
-      "skills": ["Git", "Vercel", "CI/CD", "Blockchain", "VS Code", "Postman"]
+      "skills": ["Git", "Vercel","VS Code", "Postman", "CI/CD basic", "Blockchain", ]
   }
   ]
 }

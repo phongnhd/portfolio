@@ -57,8 +57,8 @@ function ComingSoonCard({ project }: { project: Project }) {
 
         <button
           className={`pj-cs-notify ${notified ? "done" : "idle"}`}
-          onClick={() => !notified && setNotified(true)}
-        >
+          onClick={() => !notified && setNotified(true)}>
+          
           {notified ? (
             <><BellOff style={{ width: 14, height: 14 }} /> Notified!</>
           ) : (
@@ -412,7 +412,7 @@ export function Projects() {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    fill
+                    fill unoptimized 
                     className="object-contain"
                   />
                   <div className="pj-overlay">

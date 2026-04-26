@@ -107,8 +107,9 @@ export function Hero() {
               >
                 <Image
                   src="/image.png"
-                  alt="Developer Portrait"
+                  alt="Profile Photo"
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>

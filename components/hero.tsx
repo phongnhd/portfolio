@@ -65,13 +65,11 @@ export function Hero() {
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl font-headline">
               Building Modern <br />
-              <span className="text-primary">Web Applications</span>
+              <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">Web Applications</span>
             </h1>
 
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Full-stack developer focused on creating modern, responsive,
-              and user-friendly web applications using React, Node.js,
-              and modern web technologies.
+             Full-stack developer experienced in building scalable web applications using modern frontend and backend technologies.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <Button asChild size="lg" className="btn-work bg-accent text-accent-foreground hover:bg-accent">
@@ -96,15 +94,23 @@ export function Hero() {
           <div className="relative flex-shrink-0 avatar-wrap" style={{ padding: "14px 0 0 14px" }}>
             <div
               className="avatar-shadow absolute h-64 w-64 sm:h-80 sm:w-80 lg:h-96 lg:w-96 rounded-full"
-              style={{ top: 14, left: 14, background: "#000", zIndex: 0 }}  />
+              style={{ top: 14, left: 14, background: "#000", zIndex: 0 }}
+            />
             <div
               className="avatar-frame relative h-64 w-64 sm:h-80 sm:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full"
-              style={{ border: "3px solid #000", zIndex: 1 }} >
+              style={{ border: "3px solid #000", zIndex: 1 }}
+            >
               <div
                 className="avatar-img"
                 onContextMenu={(e) => e.preventDefault()}
-                style={{ width: "100%", height: "100%", position: "relative" }}>
-                <Image src="/image.png" alt="Developer Portrait" fill unoptimized className="object-cover"/>
+                style={{ width: "100%", height: "100%", position: "relative" }}
+              >
+                <Image
+                  src="/image.png"
+                  alt="Developer Portrait"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>

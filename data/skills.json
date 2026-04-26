@@ -31,7 +31,7 @@
        "title": "Tools & Technologies",
       "icon": "Globe",
       "description": "Skilled in core development tools and modern technologies, with experience in blockchain.",
-      "skills": ["GitHub", "Vercel","Render", "Postman","Cloudflare (DNS, SSL/TLS, CDN, WAF, Bot)" ,"CI/CD", "Blockchain" ]
+      "skills": ["Git", "GitHub", "Docker", "Postman", "Vercel", "Render", "Cloudflare", "Blockchain" ]
   }
   ]
 }

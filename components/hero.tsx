@@ -106,7 +106,7 @@ export function Hero() {
                 style={{ width: "100%", height: "100%", position: "relative" }}
               >
                 <Image
-                  src="/image.png"
+                  src="/image.jpg"
                   alt="Profile Photo"
                   fill
                   unoptimized
